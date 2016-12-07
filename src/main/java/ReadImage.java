@@ -1,16 +1,19 @@
-import java.awt.Image;
+import java.awt.*;
+import java.awt.geom.AffineTransform;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
+import javax.swing.*;
 
 public class ReadImage
 {
+
+    final static String spec = "http://www.mkyong.com/image/mypic.jpg";
+
     public static void main( String[] args )
     {
-        String spec = "http://www.mkyong.com/image/mypic.jpg";
         Image image = inPut(spec);
         outPut(image);
     }
@@ -28,9 +31,34 @@ public class ReadImage
 
     private static void outPut(Image image) {
         JFrame frame = new JFrame();
-        frame.setSize(300, 300);
+        frame.setSize(600, 600);
         JLabel label = new JLabel(new ImageIcon(image));
+
+        JPanel contentPane = new JPanel(){
+
+            protected void paintComponent(Graphics g){
+
+                super.paintComponent(g);
+
+                AffineTransform at = AffineTransform.getTranslateInstance(100, 100);
+                at.rotate(Math.toRadians(45));
+
+                BufferedImage Apple = (BufferedImage) inPut("http://www.mkyong.com/image/mypic.jpg");
+
+                Graphics2D g2d = (Graphics2D) g;
+
+                g2d.drawImage(Apple, at, null);
+
+                g2d=(Graphics2D)g;
+                g2d.setColor(Color.BLACK);
+                g2d.drawLine(20, 20, 360, 20);
+            }
+        };
+        frame.setContentPane(contentPane);
         frame.add(label);
         frame.setVisible(true);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
+
+
 }
