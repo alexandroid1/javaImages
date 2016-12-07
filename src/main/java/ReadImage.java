@@ -7,8 +7,20 @@ import java.net.URL;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
-public class ReadImage
+import java.applet.*;
+import java.awt.image.*;
+import java.net.*;
+import java.util.*;
+import java.io.*;
+
+public class ReadImage extends Thread
 {
+    //The width and height of the output
+    private int d_w;
+    private int d_h;
+
+    private int[] dest_1d;
+
     final static String spec = "http://www.mkyong.com/image/mypic.jpg";
 
     public static void main( String[] args )
@@ -48,4 +60,5 @@ public class ReadImage
         frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
+
 }
