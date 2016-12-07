@@ -10,18 +10,23 @@ public class ReadImage
 {
     public static void main( String[] args )
     {
+        String spec = "http://www.mkyong.com/image/mypic.jpg";
+        Image image = inPut(spec);
+        outPut(image);
+    }
+
+    private static Image inPut(String spec) {
         Image image = null;
         try {
-            URL url = new URL("http://www.mkyong.com/image/mypic.jpg");
+            URL url = new URL(spec);
             image = ImageIO.read(url);
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        OutPut(image);
+        return image;
     }
 
-    private static void OutPut(Image image) {
+    private static void outPut(Image image) {
         JFrame frame = new JFrame();
         frame.setSize(300, 300);
         JLabel label = new JLabel(new ImageIcon(image));
